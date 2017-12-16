@@ -1,0 +1,47 @@
+<div id="memo-app">
+  <section class="section">
+    <div class="columns">
+      <div class="column is-2">
+        <aside class="menu">
+          <ul class="menu-list">
+            <li>
+              <a v-on:click="edit">
+                めもる
+              </a>
+            </li>
+          </ul>
+          <p class="menu-label">
+            めも
+          </p>
+          <ul class="menu-list">
+            <li v-for="memo in memos">
+              <a v-on:click="edit(memo)" :class="{ 'is-active': isActive(memo) }">
+                {{ memo.content | title }}
+              </a>
+            </li>
+          </ul>
+        </aside>
+      </div>
+      <div class="column">
+        <p class="control">
+              <textarea class="textarea" placeholder="Styling with Markdown is supported" v-model="source">
+              </textarea>
+        </p>
+        <p class="control">
+          <button class="button" :class="{ 'is-disabled': (! source), 'is-primary': source, 'is-loading': saving }" v-on:click="save">
+            φ(..)メモメモ
+          </button>
+        </p>
+        <div class="notification is-primary" v-if="notified">
+          <button class="delete" v-on:click="closeNotification"></button>
+          保存しました(≧∇≦)/
+        </div>
+      </div>
+      <div class="column">
+        <div class="content" v-html="built">
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+<script type="text/javascript" src="/assets/memo.js"></script>
